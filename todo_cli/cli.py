@@ -1,6 +1,25 @@
 import argparse
+from datetime import datetime, timedelta
 from .todo import TodoList
 from .storage import load_tasks, save_tasks
+
+def parse_due_date(date_str):
+    formats = [
+        '%Y-%m-%d',          # 2023-12-31
+        '%Y-%m-%d %H:%M',    # 2023-12-31 14:30
+        '%m/%d/%Y',          # 12/31/2023
+        '%m/%d/%Y %H:%M',    # 12/31/2023 14:30
+        '%d.%m.%Y',          # 31.12.2023
+        '%d.%m.%Y %H:%M',    # 31.12.2023 14:30
+    ]
+    
+    for fmt in formats:
+        try:
+            return datetime.strptime(date_str, fmt)
+        except ValueError:
+            continue
+    
+    raise ValueError(f"Unrecognized date format: {date_str}")
 
 def main():
     parser = argparse.ArgumentParser(description='Command-line Todo Manager')

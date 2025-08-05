@@ -1,16 +1,19 @@
 from datetime import datetime, timedelta    
 import time
 
+# The Class of task
 class Task:
+    # Initialize task properties
     def __init__(self, id, title, done=False, due_date=None):
-        self.id = id
-        self.title = title
-        self.done = done
-        self.due_date = due_date
-        self.time_spent = 0.0
-        self.time_started = None
+        self.id = id                            # Unique identifier for the task
+        self.title = title                      # Title of the task
+        self.done = done                        # Completion status
+        self.due_date = due_date                # Optional deadline datetime
+        self.time_spent = 0.0                   # Total time spent on task (in seconds)
+        self.time_started = None                # Timestamp when timer was started
     
     def to_dict(self):
+        # Convert task to dictionary
         return {
             'id': self.id,
             'title': self.title,

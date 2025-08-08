@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+*.swp
+*.db
+*.log
+dist/
+build/
+*.egg-info/
+tests/__pycache__/
+todo_cli/__pycache__/
+*.json
+*.csv

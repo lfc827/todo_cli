@@ -105,7 +105,7 @@ pip install pytest
 pytest tests/
 ```
 
-## 🧩 项目结构
+## 🧩 Project Structure
 ```
 todo-cli/
 ├── todo_cli/          # Source code

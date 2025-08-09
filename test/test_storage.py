@@ -1,6 +1,9 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import pytest
 import tempfile
-import os
 from datetime import datetime
 from todo_cli.todo import Task
 from todo_cli.storage import load_tasks, save_tasks

@@ -1,4 +1,7 @@
+import sys
 import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import pytest
 from todo_cli.cli import main
 from todo_cli.storage import load_tasks

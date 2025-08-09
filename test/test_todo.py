@@ -30,7 +30,7 @@ def test_start_stop_timer():
     
     # Start timer
     assert todo.start_timer(task.id) is True
-    assert task.timer_start is not None
+    assert task.timer_started is not None
     
     # Try to start again (should fail)
     assert todo.start_timer(task.id) is False
@@ -40,7 +40,7 @@ def test_start_stop_timer():
     elapsed = todo.stop_timer(task.id)
     assert elapsed > 0
     assert task.time_spent > 0
-    assert task.timer_start is None
+    assert task.timer_started is None
 
 # Test overdue task detection
 def test_overdue_task():

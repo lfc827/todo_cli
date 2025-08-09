@@ -3,6 +3,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
+import shlex
 from todo_cli.cli import main
 from todo_cli.storage import load_tasks
 from datetime import datetime, timedelta
@@ -10,7 +11,7 @@ import time
 
 def run_command(capsys, command, file='tasks.json'):
     # Simulate command line arguments
-    test_args = command.split()
+    test_args = shlex.split(command)
     test_args.extend(['-f', file])
     
     # Preserve original sys.argv
@@ -101,3 +102,5 @@ def test_cli_multi_day_formatting(capsys, tmp_path):
     out, _ = capsys.readouterr()
     
     assert "3 days remaining" in out
+
+

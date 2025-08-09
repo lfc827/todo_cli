@@ -163,4 +163,4 @@ class TodoList:
         return [task for task in self.tasks 
                 if not task.done 
                 and task.due_date 
-                and task.due_date <= cutoff]
+                and now <= task.due_date <= cutoff]

@@ -10,7 +10,7 @@ class Task:
         self.done = done                        # Completion status
         self.due_date = due_date                # Optional deadline datetime
         self.time_spent = 0.0                   # Total time spent on task (in seconds)
-        self.time_started = None                # Timestamp when timer was started
+        self.time_start = None                # Timestamp when timer was started
     
     def to_dict(self):
         # Convert task to dictionary
@@ -37,17 +37,17 @@ class Task:
     
     def start_timer(self):
         # Start tracking time for this task 
-        if not self.time_started:
-            self.time_started = time.time()  # Record start time
+        if not self.time_start:
+            self.time_start = time.time()  # Record start time
             return True
         return False  # Timer was already running
     
     def stop_timer(self):
         # Stop tracking time and update total
-        if self.time_started:
-            elapsed_time = time.time() - self.time_started  # Calculate elapsed time
+        if self.time_start:
+            elapsed_time = time.time() - self.time_start  # Calculate elapsed time
             self.time_spent += elapsed_time  # Add to total time spent
-            self.time_started = None  # Reset timer
+            self.time_start = None  # Reset timer
             return elapsed_time
         return 0.0  # Timer was not running
     

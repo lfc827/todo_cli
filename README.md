@@ -26,6 +26,8 @@ cd todo-cli
 pip install -r requirements.txt
 ```
 
+### Basic Usage
+```bash
 # Add new task
 python -m todo_cli.cli add "Write weekly report" --due "2023-12-15 17:00"
 
@@ -40,6 +42,7 @@ python -m todo_cli.cli stop 1
 
 # Mark task as completed
 python -m todo_cli.cli done 1
+```
 
 ## 📖 Detailed Usage Guide
 

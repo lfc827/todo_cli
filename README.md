@@ -1,108 +1,129 @@
-# Todo-CLI: Command Line Todo Manager
+# Todo CLI - Command Line Task Manager
 
-A powerful command-line task manager with support for task management, time tracking, and deadline reminders. Built with Python - simple to use yet feature-rich.
+Todo CLI is a powerful, feature-rich command-line task manager designed for productivity enthusiasts who prefer terminal-based tools. With support for deadlines, time tracking, and intuitive task management, it helps you stay organized without leaving your terminal.
+
 
 ## ✨ Key Features
 
-- ✅ **Task Management**: Add, view, complete, and delete tasks
-- ⏱️ **Time Tracking**: Record actual time spent on tasks
-- 📅 **Deadlines**: Set due dates and view remaining time
-- 📊 **Time Reports**: View task time statistics
-- 💾 **Data Persistence**: Automatic saving to JSON or CSV files
-- 🔔 **Smart Reminders**: View upcoming and overdue tasks
 
-## 🚀 Quick Start
+- ✅**Task Management**: Create, view, complete, and delete tasks
+- 📅**Smart Deadlines**: Supports absolute dates (2024-12-31) and relative dates (tomorrow)
+- ⏱️**Time Tracking**: Start/stop timers to track time spent on tasks
+- 🔔**Prioritization**: Visual indicators for overdue and upcoming tasks
+- 💾**Custom Storage**: JSON or CSV file formats with automatic backups
+- 📋**Detailed Reporting**: Time tracking summaries and remaining time calculations
+- 🌍**Unicode Support**: Works with international characters and emojis
 
-### Prerequisites
-- Python 3.7 or higher
+## ⚙️ Installation
 
-### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/todo-cli.git
+   cd todo-cli
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Make the script executable:
+   ```bash
+   chmod +x todo_cli/cli.py
+   ```
+
+4. Add alias to your shell profile (`.bashrc` or `.zshrc`):
+   ```bash
+   alias todo="python /path/to/todo-cli/todo_cli/cli.py"
+   ```
+
+## 🚀 Getting Started
+
+### Basic Workflow
 ```bash
-# Clone repository
-git clone https://github.com/yourusername/todo-cli.git
-cd todo-cli
+# Add a new task
+todo add "Buy groceries" --due tomorrow
 
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### Basic Usage
-```bash
-# Add new task
-python -m todo_cli.cli add "Write weekly report" --due "2023-12-15 17:00"
-
-# List all tasks
-python -m todo_cli.cli list
-
-# Start task timer
-python -m todo_cli.cli start 1
-
-# Stop task timer
-python -m todo_cli.cli stop 1
+# List active tasks
+todo list
 
 # Mark task as completed
-python -m todo_cli.cli done 1
+todo done 1
+
+# Delete a task
+todo delete 1 --no-confirm
 ```
 
-## 📖 Detailed Usage Guide
-
-### Adding Tasks
+### Advanced Features
 ```bash
-python -m todo_cli.cli add "Task description" [--due due_date]
-```
-- Supports multiple time formats:：`YYYY-MM-DD`、`MM/DD/YYYY`、`DD.MM.YYYY`
-- Example:：`python -m todo_cli.cli add "Prepare meeting" --due "2023-12-20 14:30"`
+# Start timer for a task
+todo start 2
 
-### Managing Tasks
+# Stop timer and record time
+todo stop 2
+
+# View time tracking report
+todo time
+
+# Check remaining time for a task
+todo remaining 3
+
+# List upcoming tasks (next 3 days)
+todo list --upcoming
+
+# List overdue tasks
+todo list --overdue
+```
+
+### 📋 Managing Tasks
+
 | Command | Description | Example |
-|------|------|------|
+|---------|-------------|---------|
+| `add "Title"` | Add a new task | `python -m todo_cli.cli add "Buy milk"` |
+| `add "Title" --due <DATE>` | Add task with deadline | `python -m todo_cli.cli add "Submit report" --due 2024-06-30` |
 | `list` | List active tasks | `python -m todo_cli.cli list` |
 | `list -a` | List all tasks (including completed) | `python -m todo_cli.cli list -a` |
 | `list -u` | List upcoming tasks | `python -m todo_cli.cli list -u` |
 | `list -o` | List overdue tasks | `python -m todo_cli.cli list -o` |
 | `done <ID>` | Mark task as completed | `python -m todo_cli.cli done 3` |
-| `delete <ID>` | Delete task | `python -m todo_cli.cli delete 2` |
+| `delete <ID>` | Delete a task | `python -m todo_cli.cli delete 2` |
+| `start <ID>` | Start timer for task | `python -m todo_cli.cli start 5` |
+| `stop <ID>` | Stop timer for task | `python -m todo_cli.cli stop 5` |
+| `time` | Show time tracking report | `python -m todo_cli.cli time` |
+| `time --summary` | Show time summary only | `python -m todo_cli.cli time --summary` |
+| `remaining <ID>` | Check remaining time for task | `python -m todo_cli.cli remaining 4` |
 
-### Time Tracking
+### Key Options
+- **Date Formats**: Use `today`, `tomorrow`, `YYYY-MM-DD`, `MM/DD/YYYY`, or `DD.MM.YYYY`  
+- **Global Options**:  
+  `-f FILE` - Specify storage file (default: tasks.json)  
+  `--no-confirm` - Skip confirmation prompts
+
+## 💾 Data Storage
+
+Tasks are stored in either JSON or CSV format (determined by file extension). The default storage file is `tasks.json`.
+
+### Storage Features:
+- 🔄 Automatic backups (creates `.backup` files before saving)
+- 📁 Supports both JSON and CSV formats
+- 🌐 Full Unicode support
+- ⚡ Efficient handling of large task lists
+
+## 🧪 Testing & Quality
+
+The test suite includes unit tests, integration tests, and performance tests:
+
 ```bash
-# Start timer
-python -m todo_cli.cli start <TaskID>
-
-# Stop timer
-python -m todo_cli.cli stop <TaskID>
-
-# View time report
-python -m todo_cli.cli time
-```
-
-### Checking Remaining Time
-```bash
-# Check time remaining for task
-python -m todo_cli.cli remaining <TaskID>
-
-# Sample output:
-# Task #1: Write weekly report
-# Due: 2023-12-15 17:00
-# Status: 2 days 3 hours remaining
-```
-
-### Data Storage
-Uses JSON format by default:
-```bash
-# Use CSV storage
-python -m todo_cli.cli add "New task" -f tasks.csv
-
-# Specify custom file
-python -m todo_cli.cli list -f my_tasks.json
-```
-
-## 🧪 Running Tests
-```bash
-# Install test dependencies
-pip install pytest
-
 # Run all tests
-pytest tests/
+pytest
+
+# Run specific test categories
+pytest tests/test_cli.py       # CLI command tests
+pytest tests/test_storage.py   # Storage system tests
+pytest tests/test_todo.py      # Core logic tests
+
+# Run performance tests (marked as slow)
+pytest -m slow
 ```
 
 ## 🧩 Project Structure
@@ -125,5 +146,10 @@ Contributions are welcome! Please follow these steps:
 4. Push to branch (git push origin feature/your-feature)
 5. Create a Pull Request
 
-Commit messages should follow [Conventional Commits](https://www.conventionalcommits.org/) specification.
+
+Commit Guidelines:
+
+1. Use [Conventional Commits](https://www.conventionalcommits.org/)
+2. Keep commits atomic and focused
+3. Include tests for new features
 
